@@ -1,0 +1,57 @@
+﻿li {
+    font-family: 'Times New Roman';
+    font-size: 20pt;
+    font-style: italic;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 1px 1px black;
+    list-style-type: none;
+    display: inline;
+    margin-left: 140px;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    padding-inline-start: 0px;
+    margin: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.divHeader {
+    background-color: darkorange;
+    padding: 10px;
+}
+
+footer {
+    background-color: darkorange;
+    padding: 10px;
+}
+
+p {
+    margin-left: 10px;
+    color: black;
+    font-family: 'Times New Roman';
+    font-style: italic;
+}
+
+body {
+    background-color: ghostwhite;
+}
+
+.divContainer {
+    border: solid black 3px;
+}
+.divBlock{
+    border: solid darkred 3px;
+    border-radius: 10px;
+    margin: 10px;
+}

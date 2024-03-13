@@ -1,0 +1,10 @@
+﻿@model List<DetailShop.Models.DbModels.Discounts>
+<h1 style="margin: 10px">На сайте присутствуют скидки</h1>
+@foreach (var discounts in @Model)
+{
+    <div class="divBlock">
+        <p>При покупках на сумму: @discounts.Total</p>
+        <p>Скидка: @discounts.Discount %</p>
+    </div>
+}
+

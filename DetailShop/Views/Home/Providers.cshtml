@@ -1,0 +1,10 @@
+﻿@model List<DetailShop.Models.DbModels.Provider>
+
+<h1>C нами сотрудничают такие бренды как</h1>
+@foreach (var provider in @Model)
+{
+    <div class="divBlock">
+        <p>@provider.Title</p>
+        <p>@provider.Information</p>
+    </div>
+}

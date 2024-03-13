@@ -1,0 +1,16 @@
+﻿@using DetailShop
+@{
+    var listMenu = new DetailShop.Models.Menu.ListMenu();
+}
+<header>
+    <div class="divHeader">
+        <nav>
+            <ul>
+                @foreach (var item in listMenu.HeaderMenu)
+                {
+                    <li><a href="@Url.Action(item.Action, item.Controller)">@item.Label</a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</header>

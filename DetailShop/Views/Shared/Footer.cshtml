@@ -1,0 +1,17 @@
+﻿
+@{
+    var listMenu = new DetailShop.Models.Menu.ListMenu();
+}
+<footer>
+    <div>
+        <nav>
+            <ul>
+                @foreach (var item in listMenu.FooterMenu)
+                {
+                    <li><a href="@Url.Action(item.Action, item.Controller)">@item.Label</a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</footer>
+
