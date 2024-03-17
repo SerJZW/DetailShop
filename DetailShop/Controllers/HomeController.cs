@@ -19,8 +19,8 @@ namespace DetailShop.Controllers
         }
         public async Task<IActionResult> Components()
         {
-            var users = await _context.Component.ToListAsync();
-            return View(users);
+            var components = await _context.Component.ToListAsync();
+            return View(components);
         }
         public async Task<IActionResult> Discount()
         {

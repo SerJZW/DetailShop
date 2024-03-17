@@ -11,7 +11,7 @@
     padding: 10px;
 }
 
-a {
+.aClass {
     text-decoration: none;
     color: inherit;
 }
@@ -41,17 +41,85 @@ p {
     color: black;
     font-family: 'Times New Roman';
     font-style: italic;
+    font-weight: bold;
 }
 
 body {
-    background-color: ghostwhite;
+    background: #F5F5DC;
 }
 
 .divContainer {
     border: solid black 3px;
 }
-.divBlock{
+
+.divBlock {
     border: solid darkred 3px;
     border-radius: 10px;
-    margin: 10px;
+    margin: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 30px;
 }
+
+h1 {
+    margin-left: 50px;
+    color: black;
+    font-family: 'Times New Roman';
+    font-style: italic;
+    font-weight: bold;
+}
+
+.TextClass {
+    margin: 40px;
+    color: black;
+    font-family: 'Times New Roman';
+    font-style: italic;
+    font-weight: bold;
+    border: 3px solid darkred;
+    border-radius: 15px;
+    padding: 10px;
+}
+/* Основные стили для таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Стили для заголовка таблицы */
+thead th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Стили для строк таблицы */
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Альтернативный фон для четных строк */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* При наведении курсора на строку */
+tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Стили для ссылок в таблице */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
