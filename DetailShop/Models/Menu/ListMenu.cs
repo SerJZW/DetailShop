@@ -8,6 +8,7 @@
             new ItemMenu("Home","Components", "Каталог"),
             new ItemMenu("Home", "Discount", "Скидки"),
             new ItemMenu("Home", "Providers", "Производители"),
+            new ItemMenu("Authentication", "Enter", "Войти"),
         };
         public List<ItemMenu> FooterMenu = new List<ItemMenu>()
         {

@@ -1,0 +1,25 @@
+﻿@using DetailShop.Models.DbModels
+@model Account
+
+
+<h1>Registration</h1>
+
+@using (Html.BeginForm("Registration", "Authentication", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(model => model.Login)
+        @Html.TextBoxFor(model => model.Login)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.TextBoxFor(model => model.Password)
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Register</button>
+
+}

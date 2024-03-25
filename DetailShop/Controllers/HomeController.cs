@@ -1,21 +1,39 @@
 ﻿using DetailShop.App_Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DetailShop.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using System.Text;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DetailShop.Controllers
 {
- 
+
     public class HomeController : Controller
     {
+
         private readonly ApplicationContext _context;
+
 
         public HomeController(ApplicationContext context)
         {
             _context = context;
         }
+
+
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Enter", "Authentication");
+            }
         }
         public async Task<IActionResult> Components()
         {
@@ -34,3 +52,4 @@ namespace DetailShop.Controllers
         }
     }
 }
+

@@ -6,8 +6,8 @@
     color: white;
     text-shadow: 2px 1px 1px black;
     list-style-type: none;
-    display: inline;
-    margin-left: 140px;
+    display:inline;
+    margin-left: 50px;
     padding: 10px;
 }
 
@@ -123,3 +123,8 @@ a {
     a:hover {
         text-decoration: underline;
     }
+
+  img{
+      width:100px;
+      height:100px;
+  }
