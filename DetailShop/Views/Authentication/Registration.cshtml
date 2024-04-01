@@ -2,16 +2,17 @@
 @model Account
 
 
-<h1>Registration</h1>
+
 
 @using (Html.BeginForm("Registration", "Authentication", FormMethod.Post))
 {
+    <h1 class="loginregH1">Регистрация</h1>
     <div>
-        @Html.LabelFor(model => model.Login)
+        <label>Логин</label>
         @Html.TextBoxFor(model => model.Login)
     </div>
     <div>
-        @Html.LabelFor(model => model.Password)
+        <label>Пароль</label>
         @Html.TextBoxFor(model => model.Password)
     </div>
     @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -20,6 +21,6 @@
             @ViewBag.ErrorMessage
         </div>
     }
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Регистрация</button>
 
 }

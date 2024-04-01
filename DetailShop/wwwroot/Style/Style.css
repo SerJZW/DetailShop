@@ -1,13 +1,21 @@
-﻿li {
-    font-family: 'Times New Roman';
-    font-size: 20pt;
-    font-style: italic;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 1px 1px black;
+﻿.headerli {
+    font-family: "PT Sans", sans-serif;
+    font-size: 12pt;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     list-style-type: none;
-    display:inline;
-    margin-left: 50px;
+    display: inline;
+    margin-left: 130px;
+    padding: 10px;
+}
+.footerli {
+    font-family: "PT Sans", sans-serif;
+    font-size: 10pt;
+    color: #222121;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    list-style-type: none;
+    display: inline;
+    margin-left: 130px;
     padding: 10px;
 }
 
@@ -21,31 +29,43 @@ ul {
     margin: 0px;
 }
 
-body {
-    margin: 0px;
-    padding: 0px;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .divHeader {
-    background-color: darkorange;
+    background-color: transparent;
     padding: 10px;
 }
 
 footer {
-    background-color: darkorange;
-    padding: 10px;
+    background-color: transparent;
+    position: fixed;
+    margin-top: auto;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #e8e8e8;
+}
+.wrapper {
+    position:relative;
+    min-height: 100%;
+}
+
+.content {
+    flex: 1;
 }
 
 p {
     margin-left: 10px;
     color: black;
-    font-family: 'Times New Roman';
-    font-style: italic;
-    font-weight: bold;
+    font-family: Verdana;
 }
 
 body {
-    background: #F5F5DC;
+    background: ghostwhite;
 }
 
 .divContainer {
@@ -53,7 +73,7 @@ body {
 }
 
 .divBlock {
-    border: solid darkred 3px;
+    border: solid darkgreen 3px;
     border-radius: 10px;
     margin: 20px;
     margin-left: 50px;
@@ -64,22 +84,18 @@ body {
 h1 {
     margin-left: 50px;
     color: black;
-    font-family: 'Times New Roman';
-    font-style: italic;
-    font-weight: bold;
+    font-family: Verdana;
+    font-weight:400;
 }
 
 .TextClass {
     margin: 40px;
     color: black;
-    font-family: 'Times New Roman';
-    font-style: italic;
-    font-weight: bold;
+    font-family: Verdana;
     border: 3px solid darkred;
     border-radius: 15px;
     padding: 10px;
 }
-/* Основные стили для таблицы */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -88,7 +104,6 @@ table {
     font-size: 14px;
 }
 
-/* Стили для заголовка таблицы */
 thead th {
     background-color: #f2f2f2;
     color: #333;
@@ -98,33 +113,111 @@ thead th {
     border-bottom: 2px solid #ddd;
 }
 
-/* Стили для строк таблицы */
 tbody td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-/* Альтернативный фон для четных строк */
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* При наведении курсора на строку */
 tbody tr:hover {
     background-color: #f2f2f2;
 }
 
-/* Стили для ссылок в таблице */
 a {
-    color: #007bff;
+    color: inherit;
     text-decoration: none;
 }
 
-    a:hover {
-        text-decoration: underline;
-    }
+img {
+    width: 100px;
+    height: 100px;
+}
+form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:80%;
+    max-width: 600px;
+    height:100%;
+    max-height:300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+}
 
-  img{
-      width:100px;
-      height:100px;
-  }
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: Verdana;
+}
+
+input[type="text"],
+input[type="password"] {
+    max-width:580px;
+    padding:10px;
+    width: 100%;
+    height:100%;
+    margin-bottom: 10px;
+    margin-right:10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-family: Verdana;
+}
+
+.alert {
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top:25px;
+    margin-bottom: 0;
+    font-size: 8pt;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: #fff;
+    font-family:Verdana;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary {
+    background-color: forestgreen;
+    border-color: black;
+}
+
+.form-inline .btn {
+    margin-left: 10px;
+}
+.loginregH1 {
+    text-align: center;
+    font-family: Verdana;
+    font-size: 20pt;
+    font-weight: 400;
+    margin-right: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}

@@ -74,7 +74,7 @@ namespace DetailShop.Controllers
                     ID_Role = 1,
                     Last_Sign = DateOnly.FromDateTime(DateTime.UtcNow),
                     Login = model.Login,
-                    Password = EncryptPassword(model.Password)
+                    Password = EncryptPassword(model.Password!)
                 };
 
                 _context.Account.Add(account);

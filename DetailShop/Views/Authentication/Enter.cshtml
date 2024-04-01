@@ -2,15 +2,16 @@
 @model LoginViewModel
 
 
-<h1>Login</h1>
+
 @using (Html.BeginForm("Enter", "Authentication", FormMethod.Post))
-{ 
+{
+    <h1 class="loginregH1">Авторизация</h1>
     <div>
-        @Html.LabelFor(model => model.Login)
+        <label>Логин</label>
         @Html.TextBoxFor(model => model.Login)
     </div>
     <div>
-        @Html.LabelFor(model => model.Password)
+        <label>Пароль</label>
         @Html.TextBoxFor(model => model.Password)
     </div>
     @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -19,11 +20,8 @@
             @ViewBag.ErrorMessage
         </div>
     }
-    <button type="submit" class="btn btn-primary">Enter</button>
-    @using (Html.BeginForm("Registration", "Authentication", FormMethod.Get, new { @class = "form-inline" }))
-    {
-        <button type="submit" class="btn btn-primary">Registration</button>
-    }
+    <button type="submit" class="btn btn-primary">Войти</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Registration", "Authentication")'">Регистрация</button>
 
 
 }
