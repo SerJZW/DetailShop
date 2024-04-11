@@ -8,7 +8,7 @@
             <ul>
                 @foreach (var item in listMenu.FooterMenu)
                 {
-                    <li class="footerli"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></li>
+                    <li class="footerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
                 }
             </ul>
         </nav>

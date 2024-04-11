@@ -1,26 +1,16 @@
 ﻿@model List<DetailShop.Models.DbModels.Component>
 
+<h1 >Комплектующие</h1>
 <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>ID_Type</th>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Specifications</th>
-        </tr>
-    </thead>
     <tbody>
         @foreach (var Component in Model)
         {
             <tr>
-                <td>@Component.ID_Component</td>
                 <td>@Component.Name</td>
-                <td>@Component.ID_Type</td>
                 <td>@Component.Description</td>
                 <td>@Component.Cost</td>
                 <td>@Component.Specifications</td>
+                <td><button class="btn btn-primary">В корзину</button></td>
             </tr>
         }
     </tbody>

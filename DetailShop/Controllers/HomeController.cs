@@ -26,14 +26,7 @@ namespace DetailShop.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Enter", "Authentication");
-            }
         }
         public async Task<IActionResult> Components()
         {

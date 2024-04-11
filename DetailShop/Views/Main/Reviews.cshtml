@@ -1,11 +1,11 @@
 ﻿@model List<DetailShop.Models.DbModels.Reviews>
-<h1 style="margin: 10px">Пользователи</h1>
+<h1>Отзывы</h1>
 @foreach (var reviews in @Model)
 {
     <div class="divBlock">
         <p>Пользователь № @reviews.ID_User</p>
-        <p>Комментарий: @reviews.Comment </p>
-        <p>Оценка: @reviews.Rating</p>
+        <p>Комментарий: <i style="font-weight:600">@reviews.Comment</i></p>
+        <p>Оценка: <strong>@reviews.Rating</strong></p>
     </div>
 }
 

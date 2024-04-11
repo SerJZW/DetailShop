@@ -14,9 +14,5 @@ app.MapControllerRoute
 );
 
 app.UseStaticFiles();
-
 //app.MapGet("/", (ApplicationContext db) => db.Orders.ToList());
-
-
-
 app.Run();
