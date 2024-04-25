@@ -1,17 +1,15 @@
 ﻿using DetailShop.App_Data;
-using DetailShop.Models;
 using DetailShop.Models.DbModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+
 
 namespace DetailShop.Controllers
 {
     public class MainController : Controller
     {
         private readonly ApplicationContext _context;
-        private readonly Account account;
         public MainController(ApplicationContext context)
         {
             _context = context;
@@ -34,7 +32,7 @@ namespace DetailShop.Controllers
                     return View();
                 }
             }
-                return RedirectToAction("AccessDenied", "Authentication");
+            return RedirectToAction("AccessDenied", "Authentication");
         }
         public async Task<IActionResult> Reviews()
         {
@@ -62,13 +60,38 @@ namespace DetailShop.Controllers
             }
             return RedirectToAction("AdminError", "Authentication");
         }
+        [HttpPost]
+        public ActionResult Users(IFormCollection form)
+        {
+            var model = new Account
+            {
+                Login = form["login"],
+                Password = form["password"],
+                ID_Role = Convert.ToInt32(form["role"]),
+                Last_Sign = DateOnly.FromDateTime(DateTime.Now)
+            };
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Account.Add(model);
+                    _context.SaveChanges();
+                    return RedirectToAction("Users", "Main");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Произошла ошибка при добавлении пользователя: " + ex.Message);
+                }
+            }
+
+            return View(model);
+        }
+
 
     }
-    //[HttpPost]
-    //public ActionResult AddUser(UserViewModel model)
-    //{
-        
-    //}
 }
+
+
 
 

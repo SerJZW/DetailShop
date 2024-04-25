@@ -34,28 +34,7 @@ app.MapControllerRoute(
 app.UseAuthentication();
 app.UseAuthorization();
 
- async Task ConfigureRoles(IServiceProvider serviceProvider)
-{
-    // Создание ролей
-    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    string[] roleNames = { "Admin", "User" };
-    foreach (var roleName in roleNames)
-    {
-        var roleExist = await roleManager.RoleExistsAsync(roleName);
-        if (!roleExist)
-        {
-            await roleManager.CreateAsync(new IdentityRole(roleName));
-        }
-    }
 
-    // Присвоение ролей пользователю (например, администратору)
-    var userManager = serviceProvider.GetRequiredService<UserManager<Account>>();
-    var user = await userManager.FindByEmailAsync("admin@example.com");
-    if (user != null)
-    {
-        await userManager.AddToRoleAsync(user, "Admin");
-    }
-}
 
 app.UseStaticFiles();
 

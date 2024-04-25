@@ -1,16 +1,40 @@
-﻿@model DetailShop.Models.UserViewModel
+﻿@model IEnumerable<DetailShop.Models.DbModels.Account>
+
 <h1>Пользователи</h1>
-@foreach (var users in Model.Accounts)
+
+@foreach (var user in Model)
 {
     <div class="divBlock">
-        <p>Имя: @users.Login</p>
-        <p>Последний вход: @users.Last_Sign </p>
-        <p>Роль: @users.ID_Role</p>
+        <p>Имя: @user.Login</p>
+        <p>Последний вход: @user.Last_Sign </p>
+        <p>Роль: @user.ID_Role</p>
+        <button class="btn btn-primary">Change user </button>
     </div>
 }
-<form method="post" action="@Url.Action("AddUser", "Main")">
-    <input type="text" name="NameUser" value="@Model.NameUser" />
-    <input type="number" name="Role" value="@Model.Role" />
-    <button type="submit" class="btn btn-primary">Добавить пользователя</button>
-</form>
+
+
+@using (Html.BeginForm("Users", "Main", FormMethod.Post))
+{
+    <h1>Добавить пользователя</h1>
+    <div>
+        <label for="login">Логин:</label>
+        @Html.TextBox("login", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+    </div>
+
+    <div>
+        <label for="password">Пароль:</label>
+        @Html.Password("password", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+    </div>
+
+    <div>
+        <label for="role">Роль:</label>
+        @Html.DropDownList("role", new SelectList(new[] {
+    new SelectListItem { Text = "Администратор", Value = "1" },
+    new SelectListItem { Text = "Модератор", Value = "2" },
+    new SelectListItem { Text = "Пользователь", Value = "3" },
+    }, "Value", "Text"), "Выберите роль", new { @class = "form-control", required = "required" })
+    </div>
+
+    <button class="btn btn-primary" type="submit">Добавить</button>
+}
 
