@@ -26,12 +26,28 @@ namespace DetailShop.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
                 return View();
+                
+            }
+            else
+            {
+                return RedirectToAction("Enter", "Authentication");
+            }
         }
+
         public async Task<IActionResult> Components()
         {
-            var components = await _context.Component.ToListAsync();
-            return View(components);
+            if (User.Identity.IsAuthenticated)
+            {
+                var components = await _context.Component.ToListAsync();
+                return View(components);
+            }
+            else
+            {
+                return RedirectToAction("AccsessDenied", "Authentication");
+            }
         }
         public async Task<IActionResult> Discount()
         {
@@ -43,6 +59,7 @@ namespace DetailShop.Controllers
             var providers = await _context.Provider.ToListAsync();
             return View(providers);
         }
+
     }
 }
 

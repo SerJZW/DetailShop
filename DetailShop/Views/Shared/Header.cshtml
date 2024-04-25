@@ -6,9 +6,20 @@
     <div class="divHeader">
         <nav>
             <ul>
-                @foreach (var item in listMenu.HeaderMenu)
+                @if (User.Identity.IsAuthenticated == false)
                 {
-                    <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    @foreach (var item in listMenu.NotLoginHeaderMenu)
+                    {
+                        <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
+                }
+                else
+                {
+                    @foreach (var item in listMenu.LoginHeaderMenu)
+                    {
+                        <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
+                    <p style="font-size: 10pt; margin-left:100px;">Добро пожаловать, @User.Identity.Name!</p>
                 }
             </ul>
         </nav>

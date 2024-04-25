@@ -1,7 +1,11 @@
 ﻿using DetailShop.App_Data;
 using DetailShop.Models;
 using DetailShop.Models.DbModels;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -21,7 +25,7 @@ namespace DetailShop.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Enter(LoginViewModel model)
+        public async Task<IActionResult> Enter(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -31,6 +35,18 @@ namespace DetailShop.Controllers
                     var encpass = EncryptPassword(model.Password);
                     if (encpass == user.Password)
                     {
+                        var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, model.Login), 
+                    new Claim(ClaimTypes.NameIdentifier, user.ID_Account.ToString()) 
+                };
+
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var authProperties = new AuthenticationProperties
+                        {
+                        };
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
                         return RedirectToAction("Components", "Home");
                     }
                 }
@@ -38,6 +54,13 @@ namespace DetailShop.Controllers
             }
 
             return View(model);
+        }
+
+
+        public async Task<IActionResult> Exit()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Enter", "Authentication");
         }
         private string EncryptPassword(string password)
         {
@@ -60,7 +83,7 @@ namespace DetailShop.Controllers
         [HttpPost]
         public IActionResult Registration(Account model)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var existingAccount = _context.Account.FirstOrDefault(a => a.Login == model.Login);
@@ -71,7 +94,7 @@ namespace DetailShop.Controllers
                 }
                 var account = new Account
                 {
-                    ID_Role = 1,
+                    ID_Role = 3,
                     Last_Sign = DateOnly.FromDateTime(DateTime.UtcNow),
                     Login = model.Login,
                     Password = EncryptPassword(model.Password!)
@@ -82,7 +105,17 @@ namespace DetailShop.Controllers
 
                 return RedirectToAction("Enter");
             }
-            return View("Registration",model);
+            return View("Registration", model);
+        }
+        [HttpGet]
+        public IActionResult AccsessDenied()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult AdminError()
+        {
+            return View();
         }
     }
 }

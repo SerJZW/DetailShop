@@ -10,7 +10,13 @@
                 <td>@Component.Description</td>
                 <td>@Component.Cost</td>
                 <td>@Component.Specifications</td>
-                <td><button class="btn btn-primary">В корзину</button></td>
+                <td>
+                    <form method="post" action="@Url.Action("AddToCart", "Main")">
+                        <input type="hidden" name="componentId" value="@Component.ID_Component" />
+                        <input type="number" name="quantity" value="1" />
+                        <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

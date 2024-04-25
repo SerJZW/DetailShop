@@ -8,5 +8,6 @@ namespace DetailShop.Models.DbModels
         public int ID_Order { get; set; }
         public int ID_Component { get; set; }
         public int Quanity { get; set; }
+    
     }
 }

@@ -1,10 +1,16 @@
-﻿@model List<DetailShop.Models.DbModels.User>
+﻿@model DetailShop.Models.UserViewModel
 <h1>Пользователи</h1>
-@foreach (var users in @Model)
+@foreach (var users in Model.Accounts)
 {
     <div class="divBlock">
-        <p>Имя: @users.Name</p>
-        <p>Email: @users.Email %</p>
+        <p>Имя: @users.Login</p>
+        <p>Последний вход: @users.Last_Sign </p>
+        <p>Роль: @users.ID_Role</p>
     </div>
 }
+<form method="post" action="@Url.Action("AddUser", "Main")">
+    <input type="text" name="NameUser" value="@Model.NameUser" />
+    <input type="number" name="Role" value="@Model.Role" />
+    <button type="submit" class="btn btn-primary">Добавить пользователя</button>
+</form>
 
