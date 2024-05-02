@@ -1,24 +1,17 @@
-﻿@model List<DetailShop.Models.DbModels.Order_Item>;
+﻿﻿
+@model List<DetailShop.Models.DbModels.Orders>
 
-<h2>Корзина</h2>
-
-@if (Model == null || Model.Count == 0)
-{
-    <p>Корзина пуста</p>
-}
-else
-{
-    <table>
-        <tr>
-            <th>ID компонента</th>
-            <th>Количество</th>
-        </tr>
-        @foreach (var item in Model)
+<main>
+    <h2 style="text-align:center;">Ваша корзина</h2>
+    <ul>
+        @foreach (var order in Model)
         {
-            <tr>
-                <td>@item.ID_Component</td>
-                <td>@item.Quanity</td>
-            </tr>
+            <div class="containermanufacture">
+                <div class="manufacturer-card">
+                    <p>Номер заказа: @order.ID_Order</p>
+                    <p>Цена: @order.Result</p>
+                </div>
+            </div>
         }
-    </table>
-}
+    </ul>
+</main>

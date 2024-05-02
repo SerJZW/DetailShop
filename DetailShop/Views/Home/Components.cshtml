@@ -1,23 +1,40 @@
-﻿@model List<DetailShop.Models.DbModels.Component>
+﻿@model List<DetailShop.Models.DbModels.Components>
 
+ <main>
 <h1 >Комплектующие</h1>
-<table>
-    <tbody>
-        @foreach (var Component in Model)
+    <h1 style="margin-left:20px;">Наш ассортимент продуктов</h1>
+    <div class="products-container">
+        @foreach (var product in Model)
         {
-            <tr>
-                <td>@Component.Name</td>
-                <td>@Component.Description</td>
-                <td>@Component.Cost</td>
-                <td>@Component.Specifications</td>
-                <td>
-                    <form method="post" action="@Url.Action("AddToCart", "Main")">
-                        <input type="hidden" name="componentId" value="@Component.ID_Component" />
-                        <input type="number" name="quantity" value="1" />
-                        <button type="submit" class="btn btn-primary">Добавить в корзину</button>
-                    </form>
-                </td>
-            </tr>
+            <div class="product-card">
+                <div class="product-details">
+                    <h2>@product.Name</h2>
+                    <p class="product-description">@product.Description</p>
+                    <p class="product-price">@product.Cost</p>
+                    <button class="buy-button" onclick="addToCart(@product.ID_Component, @product.Cost)">Купить</button>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    <script>
+        function addToCart(productId, unitPrice) {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/Home/AddToCart';
+
+            var productIdField = document.createElement('input');
+            productIdField.type = 'hidden';
+            productIdField.name = 'productID';
+            productIdField.value = productId;
+            form.appendChild(productIdField);
+
+            var unitPriceField = document.createElement('input');
+            unitPriceField.type = 'hidden';
+            unitPriceField.name = 'unitPrice';
+            unitPriceField.value = unitPrice;
+            form.appendChild(unitPriceField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</main>

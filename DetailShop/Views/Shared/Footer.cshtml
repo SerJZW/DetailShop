@@ -1,14 +1,31 @@
-﻿
-@{
+﻿@{
     var listMenu = new DetailShop.Models.Menu.ListMenu();
+    int? userRole = ViewBag.UserRole as int?;
 }
 <footer>
     <div>
         <nav>
             <ul>
-                @foreach (var item in listMenu.FooterMenu)
+                @if (User.Identity!.IsAuthenticated == false)
                 {
-                    <li class="footerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    @foreach (var item in listMenu.GuestFooterMenu)
+                    {
+                        <li class="footerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
+                }
+                else if (userRole == 3)
+                {
+                    @foreach (var item in listMenu.UserFooterMenu)
+                    {
+                        <li class="footerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
+                }
+                else if (userRole == 1)
+                {
+                    @foreach (var item in listMenu.AdminFooterMenu)
+                    {
+                        <li class="footerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
                 }
             </ul>
         </nav>

@@ -1,0 +1,42 @@
+﻿@model List<DetailShop.Models.DbModels.Provider>
+<main>
+<h1>C нами сотрудничают такие бренды как</h1>
+@foreach (var provider in @Model)
+{
+    <div class="divBlock">
+        <p style="font-size:18pt; font-weight:bold;">@provider.Title</p>
+        <img src="~/images/ProviderImages/@(provider.Title.Replace(" ", "")).jpg" alt="@provider.Title" />
+        <p>@provider.Information</p>
+    </div>
+}
+    @using (Html.BeginForm("AddProviders", "Home", FormMethod.Post))
+    {
+        <h1>Добавить Производителя</h1>
+        <div>
+            <label for="text">Название компании:</label>
+            @Html.TextBox("Title", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+
+        <div>
+            <label for="text">Информация:</label>
+            @Html.TextBox("info", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="role">Тип комплектующих:</label>
+            @Html.DropDownList("type", new SelectList(new[] {
+        new SelectListItem { Text = "Процессор", Value = "1" },
+        new SelectListItem { Text = "Хранение", Value = "2" },
+        new SelectListItem { Text = "Видеокарта", Value = "3" },
+        new SelectListItem { Text = "Материнская плата", Value = "4" },
+        new SelectListItem { Text = "Блок питания", Value = "5" },
+        new SelectListItem { Text = "Охлаждение", Value = "6" },
+        new SelectListItem { Text = "Периферийные устройства", Value = "7" },
+        new SelectListItem { Text = "Корпус", Value = "8" },
+        new SelectListItem { Text = "Сетевое оборудование", Value = "9" },
+        new SelectListItem { Text = "Память", Value = "10" }
+        }, "Value", "Text"), "Выберите тип комплектующих", new { @class = "form-control", required = "required" })
+        </div>
+
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    }
+</main>

@@ -7,7 +7,7 @@ namespace DetailShop.App_Data
     {
         #region DbSets
         public DbSet<Account> Account { get; set; } = null!;
-        public DbSet<Component> Component { get; set; } = null!;
+        public DbSet<Components> Component { get; set; } = null!;
         public DbSet<Discounts> Discount { get; set; } = null!;
         public DbSet<Order_Item> Order_Item { get; set; } = null!;
         public DbSet<Orders> Orders { get; set; } = null!;

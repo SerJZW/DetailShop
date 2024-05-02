@@ -2,7 +2,7 @@
 
 namespace DetailShop.Models.DbModels
 {
-    public class Component
+    public class Components
     {
         [Key] public int ID_Component { get; set; }
         public string? Name { get; set; }

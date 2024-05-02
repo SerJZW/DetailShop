@@ -1,0 +1,31 @@
+﻿@model List<DetailShop.Models.DbModels.Reviews>
+<main>
+<h1>Отзывы</h1>
+@foreach (var reviews in @Model)
+{
+    <div class="divBlock">
+        <p>Пользователь № @reviews.ID_Account</p>
+        <p>Комментарий: <i style="font-weight:600">@reviews.Comment</i></p>
+        <p>Оценка: <strong>@reviews.Rating</strong></p>
+    </div>
+}
+    @using (Html.BeginForm("AddReviews", "Main", FormMethod.Post))
+    {
+        <h3 style="text-align:center; margin:0;">Оставить отзыв</h3>
+        <div>
+            <label for="comment">Комментарий:</label>
+            @Html.TextArea("comment", null, new { @class = "form-control", required = "required", rows = "4" })
+        </div>
+        <div>
+            <label for="type">Комплектующее:</label>
+            @Html.DropDownList("type", (IEnumerable<SelectListItem>)ViewBag.ComponentList, new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="rating">Оценка:</label>
+            @Html.TextBox("rating", null, new { @class = "form-control", required = "required", type = "number", min = "1", max = "5" })
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    }
+</main>
+
+

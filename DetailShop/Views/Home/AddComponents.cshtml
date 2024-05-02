@@ -1,0 +1,74 @@
+﻿@model List<DetailShop.Models.DbModels.Components>
+<main>
+    <h1>Комплектующие</h1>
+    <table>
+        <tbody>
+            @foreach (var Component in Model)
+            {
+                <tr>
+                    <td>@Component.Name</td>
+                    <td>@Component.Description</td>
+                    <td>@Component.Cost</td>
+                    <td>@Component.Specifications</td>             
+                </tr>
+            }
+        </tbody>
+    </table>
+    @using (Html.BeginForm("AddComponents", "Home", FormMethod.Post))
+    {
+        <h1>Добавить Комплектующие</h1>
+        <div>
+            <label for="text">Название комплектующего:</label>
+            @Html.TextBox("Title", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+
+        <div>
+            <label for="text">Описание:</label>
+            @Html.TextBox("description", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+
+        <div>
+            <label for="number">Цена:</label>
+            @Html.TextBox("price", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="number">Характеристики:</label>
+            @Html.TextBox("spec", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="role">Производитель:</label>
+            @Html.DropDownList("providers", new SelectList(new[] {
+        new SelectListItem { Text = "Intel", Value = "1" },
+        new SelectListItem { Text = "Samsung", Value = "2" },
+        new SelectListItem { Text = "NVIDIA", Value = "3" },
+        new SelectListItem { Text = "ASUS", Value = "4" },
+        new SelectListItem { Text = "Corsair", Value = "5" },
+        new SelectListItem { Text = "CoolerMaster", Value = "6" },
+        new SelectListItem { Text = "Logitech", Value = "7" },
+        new SelectListItem { Text = "NZXT", Value = "8" },
+        new SelectListItem { Text = "TP-Link", Value = "9" },
+        new SelectListItem { Text = "Crucial", Value = "10" }
+        }, "Value", "Text"), "Выберите производителя", new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="role">Тип комплектующих:</label>
+            @Html.DropDownList("type", new SelectList(new[] {
+        new SelectListItem { Text = "Процессор", Value = "1" },
+        new SelectListItem { Text = "Хранение", Value = "2" },
+        new SelectListItem { Text = "Видеокарта", Value = "3" },
+        new SelectListItem { Text = "Материнская плата", Value = "4" },
+        new SelectListItem { Text = "Блок питания", Value = "5" },
+        new SelectListItem { Text = "Охлаждение", Value = "6" },
+        new SelectListItem { Text = "Периферийные устройства", Value = "7" },
+        new SelectListItem { Text = "Корпус", Value = "8" },
+        new SelectListItem { Text = "Сетевое оборудование", Value = "9" },
+        new SelectListItem { Text = "Память", Value = "10" }
+        }, "Value", "Text"), "Выберите тип комплектующих", new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="number">Количество:</label>
+            @Html.TextBox("count", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    }
+</main>

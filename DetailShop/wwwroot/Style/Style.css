@@ -8,17 +8,128 @@
     margin-left: 90px;
     padding: 10px;
 }
-
-.footerli {
-    font-family: "PT Sans", sans-serif;
-    font-size: 12pt;
-    color: #222121;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    list-style-type: none;
-    display: inline;
-    margin-left: 130px;
-    padding: 10px;
+.form-control {
+    display: block;
+    width: 40%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    height: 300px; /* Фиксированная высота */
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Чтобы обрезать содержимое, если оно превышает фиксированную высоту */
+}
+
+.product-details {
+    text-align: left;
+    height: 100%; /* Растягиваем содержимое карточки на всю ее высоту */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .product-details h2 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    .product-details .product-description {
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .product-details .product-price {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+.buy-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block; 
+    width: 100%;
+    font-size: 16px;
+    border-radius: 0; 
+    cursor: pointer;
+}
+
+    .buy-button:hover {
+        background-color: #0056b3; 
+    }
+.containermanufacture {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+.manufacturer-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    justify-content:center;
+    vertical-align: top;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+    .manufacturer-card p {
+        margin: 5px 0;
+    }
+
+        .manufacturer-card p:first-child {
+            font-weight: bold;
+        }
+
+        .manufacturer-card p:last-child {
+            color: #666;
+        }
+.divContent {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin:20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+    .divContent:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .divContent h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .divContent p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+    }
+
 
 .aClass {
     text-decoration: none;
@@ -30,10 +141,19 @@ ul {
     margin: 0px;
 }
 
-html, body {
+html, body, .wrapper {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+body {
+    line-height: 1.6;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .divHeader {
@@ -43,14 +163,16 @@ html, body {
 }
 
 footer {
-    background-color: transparent;
-    margin-top: auto;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background: #f7f7f7;
-    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    flex-shrink: 0;
 }
+
+    footer .footerli {
+        display: inline;
+    }
 
 .wrapper {
     position: relative;
@@ -79,15 +201,95 @@ tbody {
     border: solid black 3px;
 }
 
+  .about-section {
+            padding: 50px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .team-section {
+            padding: 50px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .team-member {
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .team-member h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .team-member p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
 .divBlock {
     border: solid darkblue 3px;
     border-radius: 10px;
     margin: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
     padding: 30px;
     background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
 }
+
+    .divBlock:hover {
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .divBlock img {
+        width: 150px;
+        height: 100px;       
+        margin-right: 20px;
+    }
+
+    .divBlock h2 {
+        font-size: 20px;
+        color: #333;
+        margin: 0;
+    }
+
+    .divBlock p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+        margin-right:10px;
+    }
 
 h1 {
     margin-left: 50px;
@@ -153,14 +355,10 @@ img {
 }
 
 form {
-    top: 50%;
-    left: 50%;
-    transform: translate(0%, 0%);
     width: 80%;
     max-width: 600px;
-    height: 100%;
-    max-height: 400px;
-    margin: 0 auto;
+    height: auto;
+    margin: 40px auto;
     padding: 20px;
     border: 3px solid darkblue;
     border-radius: 10px;
@@ -282,3 +480,6 @@ select {
         outline: none;
     }
 
+main {
+    flex: 1;
+}

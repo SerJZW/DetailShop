@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<DetailShop.Models.DbModels.Account>
 
+<main>
 <h1>Пользователи</h1>
 
 @foreach (var user in Model)
@@ -8,7 +9,6 @@
         <p>Имя: @user.Login</p>
         <p>Последний вход: @user.Last_Sign </p>
         <p>Роль: @user.ID_Role</p>
-        <button class="btn btn-primary">Change user </button>
     </div>
 }
 
@@ -37,4 +37,4 @@
 
     <button class="btn btn-primary" type="submit">Добавить</button>
 }
-
+</main>

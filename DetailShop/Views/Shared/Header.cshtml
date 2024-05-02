@@ -1,25 +1,42 @@
 ﻿@using DetailShop
 @{
     var listMenu = new DetailShop.Models.Menu.ListMenu();
+    int? userRole = ViewBag.UserRole as int?;
 }
 <header>
     <div class="divHeader">
         <nav>
             <ul>
-                @if (User.Identity.IsAuthenticated == false)
+                @if (User.Identity!.IsAuthenticated == false)
                 {
-                    @foreach (var item in listMenu.NotLoginHeaderMenu)
+                    @foreach (var item in listMenu.GuestHeaderMenu)
                     {
                         <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
                     }
                 }
-                else
+                else if (userRole == 3)
                 {
-                    @foreach (var item in listMenu.LoginHeaderMenu)
+                    @foreach (var item in listMenu.UserHeaderMenu)
                     {
                         <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
                     }
-                    <p style="font-size: 10pt; margin-left:100px;">Добро пожаловать, @User.Identity.Name!</p>
+                    <p style="font-size: 10pt;">Добро пожаловать, @User.Identity.Name!</p>
+                }
+                else if (userRole == 2)
+                {
+                    @foreach (var item in listMenu.UserHeaderMenu)
+                    {
+                        <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
+                    <p style="font-size: 10pt;">Добро пожаловать, @User.Identity.Name!</p>
+                }
+                else if (userRole == 1)
+                {
+                    @foreach (var item in listMenu.AdminHeaderMenu)
+                    {
+                        <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
+                    }
+                    <p style="font-size: 10pt;">Добро пожаловать, @User.Identity.Name!</p>
                 }
             </ul>
         </nav>
