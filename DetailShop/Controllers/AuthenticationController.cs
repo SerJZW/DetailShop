@@ -107,15 +107,6 @@ namespace DetailShop.Controllers
             }
             return View("Registration", model);
         }
-        [HttpGet]
-        public IActionResult AccsessDenied()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult AdminError()
-        {
-            return View();
-        }
+      
     }
 }

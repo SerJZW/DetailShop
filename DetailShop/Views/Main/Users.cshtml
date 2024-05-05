@@ -6,6 +6,7 @@
 @foreach (var user in Model)
 {
     <div class="divBlock">
+        <p>ID: @user.ID_Account</p>
         <p>Имя: @user.Login</p>
         <p>Последний вход: @user.Last_Sign </p>
         <p>Роль: @user.ID_Role</p>
@@ -37,4 +38,40 @@
 
     <button class="btn btn-primary" type="submit">Добавить</button>
 }
+    @using (Html.BeginForm("DeleteUser", "Main", FormMethod.Post))
+    {
+        <h1>Удалить пользователя</h1>
+        <div>
+            <label for="userId">Id пользователя:</label>
+            @Html.TextBox("userId", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+
+        <button class="btn btn-primary" type="submit">Удалить</button>
+    }
+    @using (Html.BeginForm("EditUser", "Main", FormMethod.Post))
+    {
+        <h1>Редактировать пользователя</h1>
+        <div>
+            <label for="editlogin">ID:</label>
+            @Html.TextBox("ID_Account", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="editlogin">Логин:</label>
+            @Html.TextBox("Login", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="editpassword">Пароль:</label>
+            @Html.Password("Password", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="role">Роль:</label>
+            @Html.DropDownList("ID_Role", new SelectList(new[] {
+        new SelectListItem { Text = "Администратор", Value = "1" },
+        new SelectListItem { Text = "Модератор", Value = "2" },
+        new SelectListItem { Text = "Пользователь", Value = "3" },
+        }, "Value", "Text"), "Выберите роль", new { @class = "form-control", required = "required" })
+        </div>
+
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    }
 </main>

@@ -86,7 +86,7 @@ namespace DetailShop.Controllers
                     return View(reviews);
                 }
             }
-           return RedirectToAction("AccessDenied", "Authentication");
+           return RedirectToAction("AccessDenied", "Error");
 
         }
         [HttpPost]
@@ -136,7 +136,7 @@ namespace DetailShop.Controllers
                     return View(users);
                 }
             }
-            return RedirectToAction("AdminError", "Authentication");
+            return RedirectToAction("AdminError", "Error");
         }
         [HttpPost]
         public ActionResult Users(IFormCollection form)
@@ -176,6 +176,59 @@ namespace DetailShop.Controllers
 
                 return hash;
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            var user = await _context.Account.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.Account.Remove(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Users", "Main");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Произошла ошибка при удалении пользователя: " + ex.Message);
+                return RedirectToAction("AccsessDenied", "Error");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(Account user)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingUser = await _context.Account.FindAsync(user.ID_Account);
+
+                    if (existingUser != null)
+                    {
+                        existingUser.Login = user.Login;
+                        existingUser.Password = EncryptPassword(user.Password!);
+                        existingUser.ID_Role = user.ID_Role;
+
+                        _context.Entry(existingUser).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Users", "Main");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Произошла ошибка при редактировании пользователя: " + ex.Message);
+                    return RedirectToAction("AccsessDenied", "Error");
+                }
+            }
+            return View(user);
         }
     }
 }

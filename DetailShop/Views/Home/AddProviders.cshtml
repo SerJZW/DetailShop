@@ -39,4 +39,13 @@
 
         <button class="btn btn-primary" type="submit">Добавить</button>
     }
+    @using (Html.BeginForm("DeleteProviders", "Home", FormMethod.Post))
+    {
+        <h3 style="text-align:center; margin:0;">Удалить Продукт</h3>
+        <div>
+            <label for="idmanuf">Производитель:</label>
+            @Html.DropDownList("idmanuf", (IEnumerable<SelectListItem>)ViewBag.DeleteManufList, new { @class = "form-control", required = "required" })
+        </div>
+        <button class="btn btn-primary" type="submit">Удалить</button>
+    }
 </main>

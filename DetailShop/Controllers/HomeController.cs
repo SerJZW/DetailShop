@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.ComponentModel;
 using DetailShop.Models.DbModels;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DetailShop.Controllers
 {
@@ -72,10 +73,31 @@ namespace DetailShop.Controllers
                 }
                 else if (userRole != null && userRole == 1 || userRole == 2)
                 {
+                    var TypeList = _context.Type_Component.Select(c => new SelectListItem
+                    {
+                        Text = $"{c.Title}",
+                        Value = c.ID_Type.ToString()
+                    }).ToList();
+                    TypeList.Insert(0, new SelectListItem { Text = "Тип продукта", Value = "" });
+                    ViewBag.TypeList = TypeList;
+                    var ManifList = _context.Provider.Select(c => new SelectListItem
+                    {
+                        Text = $"{c.Title}",
+                        Value = c.ID_Provider.ToString()
+                    }).ToList();
+                    ManifList.Insert(0, new SelectListItem { Text = "Производитель", Value = "" });
+                    ViewBag.ManifList = ManifList;
+                    var prodlistt = _context.Component.Select(c => new SelectListItem
+                    {
+                        Text = $"{c.Name}",
+                        Value = c.ID_Component.ToString()
+                    }).ToList();
+                    prodlistt.Insert(0, new SelectListItem { Text = "Выбирите комлектующее", Value = "" });
+                    ViewBag.DeleteCompList = prodlistt;
                     return View("AddComponents", components);
                 }
             }
-            return RedirectToAction("AccsessDenied", "Authentication");
+            return RedirectToAction("AccsessDenied", "Error");
         }
         public async Task FindOrder()
         {
@@ -159,6 +181,63 @@ namespace DetailShop.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteComponents(int idprod)
+        {
+            var prod = await _context.Component.FindAsync(idprod);
+            if (prod == null)
+            {
+                return View("AunthError");
+            }
+
+            try
+            {
+                _context.Component.Remove(prod);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Components", "Home");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ïðîèçîøëà îøèáêà ïðè óäàëåíèè ïîëüçîâàòåëÿ: " + ex.Message);
+                return RedirectToAction("AunthError", "Error");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProducts(Components prod)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingProd = await _context.Component.FindAsync(prod.ID_Component);
+
+                    if (existingProd != null)
+                    {
+                        existingProd.Name = prod.Name;
+                        existingProd.ID_Type = prod.ID_Type;
+                        existingProd.ID_Provider = prod.ID_Provider;
+                        existingProd.Description = prod.Description;
+                        existingProd.Cost = prod.Cost;
+                        existingProd.Specifications = prod.Specifications;
+                        existingProd.Count = prod.Count;
+
+                        _context.Entry(existingProd).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Components", "Home");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Ïðîèçîøëà îøèáêà ïðè ðåäàêòèðîâàíèè ïîëüçîâàòåëÿ: " + ex.Message);
+                    return RedirectToAction("AunthError", "Error");
+                }
+            }
+            return View(prod);
+        }
         public async Task<IActionResult> Discount()
         {
             CheckRole();
@@ -176,6 +255,13 @@ namespace DetailShop.Controllers
                   .Where(a => a.ID_Account.ToString() == userId)
                   .Select(a => a.ID_Role)
                   .FirstOrDefaultAsync();
+                var manuflist = _context.Provider.Select(c => new SelectListItem
+                {
+                    Text = $"{c.Title}",
+                    Value = c.ID_Provider.ToString()
+                }).ToList();
+                manuflist.Insert(0, new SelectListItem { Text = "Производитель", Value = "" });
+                ViewBag.DeleteManufList = manuflist;
                 if (userRole != null && userRole == 3)
                 {
                     return View(providers);
@@ -185,7 +271,7 @@ namespace DetailShop.Controllers
                     return View("AddProviders", providers);
                 }
             }
-            return RedirectToAction("AccsessDenied", "Authentication");
+            return RedirectToAction("AccsessDenied", "Error");
         }
 
         [HttpPost]
@@ -215,6 +301,29 @@ namespace DetailShop.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteProviders(int idmanuf)
+        {
+            var manuf = await _context.Provider.FindAsync(idmanuf);
+            if (manuf == null)
+            {
+                return View("AccsessDenied");
+            }
+
+            try
+            {
+                _context.Provider.Remove(manuf);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Providers", "Home");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ïðîèçîøëà îøèáêà ïðè óäàëåíèè ïîëüçîâàòåëÿ: " + ex.Message);
+                return RedirectToAction("AccsessDenied", "Error");
+            }
+        }
+    
+
     }
 
 }

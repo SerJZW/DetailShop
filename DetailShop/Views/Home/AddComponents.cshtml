@@ -6,6 +6,7 @@
             @foreach (var Component in Model)
             {
                 <tr>
+                    <td>@Component.ID_Component</td>
                     <td>@Component.Name</td>
                     <td>@Component.Description</td>
                     <td>@Component.Cost</td>
@@ -68,6 +69,53 @@
         <div>
             <label for="number">Количество:</label>
             @Html.TextBox("count", null, new { @style = "height: 10px", @class = "form-control", required = "required" })
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    }
+    @using (Html.BeginForm("DeleteComponents", "Home", FormMethod.Post))
+    {
+        <h3 style="text-align:center; margin:0;">Удалить Продукт</h3>
+        <div>
+            <label for="idprod">Комплектующее:</label>
+            @Html.DropDownList("idprod", (IEnumerable<SelectListItem>)ViewBag.DeleteCompList, new { @class = "form-control", required = "required" })
+        </div>
+        <button class="btn btn-primary" type="submit">Удалить</button>
+    }
+    @using (Html.BeginForm("EditProducts", "Home", FormMethod.Post))
+    {
+        <h1>Редактировать продукт</h1>
+        <div>
+            <label for="editlogin">ID:</label>
+            @Html.TextBox("ID_Component", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="editlogin">Название:</label>
+            @Html.TextBox("Name", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+
+        <div>
+            <label for="editpassword">Описание:</label>
+            @Html.TextBox("Description", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="editemail">Цена:</label>
+            @Html.TextBox("Cost", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="type">Тип продукта:</label>
+            @Html.DropDownList("ID_Type", (IEnumerable<SelectListItem>)ViewBag.TypeList, new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="manifacturers">Произовдитель:</label>
+            @Html.DropDownList("ID_Provider", (IEnumerable<SelectListItem>)ViewBag.ManifList, new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="editlogin">Характеристики:</label>
+            @Html.TextBox("Specifications", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label for="editlogin">Кол-во:</label>
+            @Html.TextBox("Count", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
         </div>
         <button class="btn btn-primary" type="submit">Добавить</button>
     }
