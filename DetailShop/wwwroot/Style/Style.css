@@ -5,9 +5,10 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     list-style-type: none;
     display: inline;
-    margin-left: 90px;
+    margin-left: 50px;
     padding: 10px;
 }
+
 .form-control {
     display: block;
     width: 40%;
@@ -23,22 +24,23 @@
     border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
 .product-card {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     width: 250px;
-    height: 300px; /* Фиксированная высота */
+    height: 300px;
     display: inline-block;
     vertical-align: top;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Чтобы обрезать содержимое, если оно превышает фиксированную высоту */
+    overflow: hidden;
 }
 
 .product-details {
     text-align: left;
-    height: 100%; /* Растягиваем содержимое карточки на всю ее высоту */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -66,28 +68,30 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: block; 
+    display: block;
     width: 100%;
     font-size: 16px;
-    border-radius: 0; 
+    border-radius: 0;
     cursor: pointer;
 }
 
     .buy-button:hover {
-        background-color: #0056b3; 
+        background-color: #0056b3;
     }
+
 .containermanufacture {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
 }
+
 .manufacturer-card {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     width: 250px;
-    justify-content:center;
+    justify-content: center;
     vertical-align: top;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -103,10 +107,11 @@
         .manufacturer-card p:last-child {
             color: #666;
         }
+
 .divContent {
     border: 2px solid #ccc;
     border-radius: 10px;
-    margin:20px;
+    margin: 20px;
     padding: 20px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -160,6 +165,7 @@ body {
     background-color: transparent;
     padding: 10px;
     background: white;
+    display: inline-block;
 }
 
 footer {
@@ -201,60 +207,60 @@ tbody {
     border: solid black 3px;
 }
 
-  .about-section {
-            padding: 50px 0;
-            background-color: #f9f9f9;
-            text-align: center;
-        }
+.about-section {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
 
-        .about-section h2 {
-            font-size: 36px;
-            color: #333;
-            margin-bottom: 20px;
-        }
+    .about-section h2 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-        .about-section p {
-            font-size: 18px;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+    .about-section p {
+        font-size: 18px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
 
-        .team-section {
-            padding: 50px 0;
-            background-color: #fff;
-            text-align: center;
-        }
+.team-section {
+    padding: 50px 0;
+    background-color: #fff;
+    text-align: center;
+}
 
-        .team-section h2 {
-            font-size: 36px;
-            color: #333;
-            margin-bottom: 20px;
-        }
+    .team-section h2 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-        .team-member {
-            display: inline-block;
-            margin: 0 20px;
-        }
+.team-member {
+    display: inline-block;
+    margin: 0 20px;
+}
 
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
+    .team-member img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
 
-        .team-member h3 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 10px;
-        }
+    .team-member h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
 
-        .team-member p {
-            font-size: 16px;
-            color: #666;
-            line-height: 1.6;
-        }
+    .team-member p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+    }
 
 .divBlock {
     border: solid darkblue 3px;
@@ -274,7 +280,7 @@ tbody {
 
     .divBlock img {
         width: 150px;
-        height: 100px;       
+        height: 100px;
         margin-right: 20px;
     }
 
@@ -288,7 +294,7 @@ tbody {
         font-size: 16px;
         color: #666;
         line-height: 1.6;
-        margin-right:10px;
+        margin-right: 10px;
     }
 
 h1 {
@@ -309,7 +315,7 @@ h1 {
 
 table {
     width: 90%;
-    margin-left:50px;
+    margin-left: 50px;
     border-collapse: collapse;
     border-spacing: 0;
     font-family: "PT Sans", sans-serif;
@@ -370,7 +376,7 @@ label {
     display: block;
     margin-bottom: 5px;
     font-family: "PT Sans", sans-serif;
-    font-weight:600;
+    font-weight: 600;
 }
 
 input[type="text"],
@@ -391,6 +397,15 @@ input[type="password"] {
     padding: 15px;
     border: 1px solid transparent;
     border-radius: 4px;
+}
+
+textarea {
+    max-height: 300px;
+    min-height: 200px;
+    max-width: 500px;
+    min-width: 450px;
+    border-radius: 10px;
+    border: 3px solid black;
 }
 
 .alert-danger {
@@ -436,6 +451,7 @@ input[type="password"] {
 .form-inline .btn {
     margin-left: 10px;
 }
+
 .loginregH1 {
     text-align: center;
     font-family: "PT Sans", sans-serif;
@@ -455,6 +471,7 @@ h1 {
     font-family: "PT Sans", sans-serif;
     font-weight: 300;
 }
+
 .buySmth {
     width: 30px;
     height: 30px;
@@ -463,6 +480,7 @@ h1 {
     border-radius: 0px;
     border: 0px;
 }
+
 select {
     width: 100%;
     padding: 10px;
@@ -471,6 +489,7 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
     select option {
         padding: 10px;
     }
@@ -483,3 +502,39 @@ select {
 main {
     flex: 1;
 }
+
+.mainClass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+    .card h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .card p {
+        font-size: 1.2em;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+        .card p span {
+            font-weight: bold;
+            color: #333;
+        }

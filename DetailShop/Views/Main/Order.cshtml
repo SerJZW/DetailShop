@@ -1,17 +1,26 @@
-﻿﻿
-@model List<DetailShop.Models.DbModels.Orders>
-
+﻿@model List<DetailShop.Models.DbModels.Orders>
+@{
+    var totalCost = ViewBag.TotalCost;
+}
 <main>
+ 
     <h2 style="text-align:center;">Ваша корзина</h2>
-    <ul>
-        @foreach (var order in Model)
-        {
-            <div class="containermanufacture">
-                <div class="manufacturer-card">
-                    <p>Номер заказа: @order.ID_Order</p>
-                    <p>Цена: @order.Result</p>
+    @using (Html.BeginForm("Pay", "Main", FormMethod.Get))
+    {
+        <ul>
+            @foreach (var order in Model)
+            {
+                <div>
+                    <div class="manufacturer-card">
+                        <p>Номер заказа: @order.ID_Order</p>
+                        <p>Цена: @Math.Round(order.Result, 2)</p>
+                    </div>
                 </div>
-            </div>
-        }
-    </ul>
+
+            }
+        </ul>
+        <p style="text-align:center; margin-right:30px;">Общая сумма заказа: <strong>@Math.Round(totalCost, 2)</strong></p>
+        <button class="btn btn-primary" type="submit">Перейти к оплате</button>
+    }
 </main>
+

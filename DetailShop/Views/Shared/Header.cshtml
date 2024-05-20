@@ -20,7 +20,7 @@
                     {
                         <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
                     }
-                    <p style="font-size: 10pt;">Добро пожаловать, @User.Identity.Name!</p>
+                    <li class="headerli">Добро пожаловать, @User.Identity.Name!</li>
                 }
                 else if (userRole == 2)
                 {
@@ -28,7 +28,7 @@
                     {
                         <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
                     }
-                    <p style="font-size: 10pt;">Добро пожаловать, @User.Identity.Name!</p>
+                    <li class="headerli">Добро пожаловать, @User.Identity.Name!</li>
                 }
                 else if (userRole == 1)
                 {
@@ -36,7 +36,7 @@
                     {
                         <li class="headerli"><button class="btn btn-primary"><a class="aClass" href="@Url.Action(item.Action, item.Controller)">@item.Label</a></button></li>
                     }
-                    <p style="font-size: 10pt;">Добро пожаловать, @User.Identity.Name!</p>
+                    <li class="headerli">Добро пожаловать, @User.Identity.Name!</li>
                 }
             </ul>
         </nav>

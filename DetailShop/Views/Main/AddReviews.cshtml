@@ -1,17 +1,20 @@
 ﻿@model List<DetailShop.Models.DbModels.Reviews>
 <main>
-<h1>Отзывы</h1>
-@foreach (var reviews in @Model)
-{
-    <div class="divBlock">
-        <p>Пользователь № @reviews.ID_Account</p>
-        <p>Комментарий: <i style="font-weight:600">@reviews.Comment</i></p>
-        <p>Оценка: <strong>@reviews.Rating</strong></p>
-    </div>
-}
+    <h1>Отзывы</h1>
+
+    @foreach (var review in Model)
+    {
+        <div class="divBlock">
+            <p>Пользователь № @review.ID_Account</p>
+            <p>Комплектующее: @(ViewBag.ComponentNames.ContainsKey(review.ID_Component) ? ViewBag.ComponentNames[review.ID_Component] : "Неизвестно")</p>
+            <p>Комментарий: <i style="font-weight:600">@review.Comment</i></p>
+            <p>Оценка: <strong>@review.Rating</strong></p>
+        </div>
+    }
+
     @using (Html.BeginForm("AddReviews", "Main", FormMethod.Post))
     {
-        <h3 style="text-align:center; margin:0;">Оставить отзыв</h3>
+        <h1>Оставить отзыв</h1>
         <div>
             <label for="comment">Комментарий:</label>
             @Html.TextArea("comment", null, new { @class = "form-control", required = "required", rows = "4" })

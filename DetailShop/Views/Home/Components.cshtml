@@ -1,20 +1,22 @@
 ﻿@model List<DetailShop.Models.DbModels.Components>
 
  <main>
-<h1 >Комплектующие</h1>
-    <h1 style="margin-left:20px;">Наш ассортимент продуктов</h1>
+    <h1>Наш ассортимент продуктов</h1>
     <div class="products-container">
         @foreach (var product in Model)
         {
             <div class="product-card">
                 <div class="product-details">
-                    <h2>@product.Name</h2>
+                    <a href="@Url.Action("ComponentDetails", "Home", new { id = product.ID_Component })">
+                        <h2>@product.Name</h2>
+                    </a>
                     <p class="product-description">@product.Description</p>
-                    <p class="product-price">@product.Cost</p>
+                    <p class="product-price">@Math.Round(product.Cost, 2)</p>
                     <button class="buy-button" onclick="addToCart(@product.ID_Component, @product.Cost)">Купить</button>
                 </div>
             </div>
         }
+    </div>
     <script>
         function addToCart(productId, unitPrice) {
             var form = document.createElement('form');

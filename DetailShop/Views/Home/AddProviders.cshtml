@@ -41,7 +41,7 @@
     }
     @using (Html.BeginForm("DeleteProviders", "Home", FormMethod.Post))
     {
-        <h3 style="text-align:center; margin:0;">Удалить Продукт</h3>
+        <h1>Удалить Производителя</h1>
         <div>
             <label for="idmanuf">Производитель:</label>
             @Html.DropDownList("idmanuf", (IEnumerable<SelectListItem>)ViewBag.DeleteManufList, new { @class = "form-control", required = "required" })

@@ -1,0 +1,11 @@
+﻿@model DetailShop.Models.DbModels.Components
+<main class="mainClass">
+    <div class="card">
+        <h1>@Model.Name</h1>
+        <p><span>Описание:</span> @Model.Description</p>
+        <p><span>Цена:</span> @Model.Cost руб.</p>
+        <p><span>Производитель:</span> @ViewBag.ProviderTitle</p>
+        <p><span>Тип:</span> @ViewBag.TypeTitle</p>
+        <p><span>Спецификации:</span> @Model.Specifications</p>
+    </div>
+</main>

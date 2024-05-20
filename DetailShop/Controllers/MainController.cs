@@ -3,6 +3,7 @@ using DetailShop.Models.DbModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -41,10 +42,18 @@ namespace DetailShop.Controllers
             if (User.Identity!.IsAuthenticated)
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
                 var userOrders = await _context.Orders
-                                               .Where(order => order.ID_Account == Convert.ToInt32(userId))
-                                               .ToListAsync();
+                                                .Where(order => order.ID_Account == Convert.ToInt32(userId))
+                                                .ToListAsync();
+
+                decimal totalCost = 0;
+
+                foreach (var order in userOrders)
+                {
+                    totalCost += order.Result; 
+                }
+
+                ViewBag.TotalCost = totalCost; 
 
                 if (userOrders != null && userOrders.Count > 0)
                 {
@@ -58,37 +67,45 @@ namespace DetailShop.Controllers
             return RedirectToAction("NotEnoughRights", "Error");
         }
 
+
         public async Task<IActionResult> Reviews()
         {
             CheckRole();
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity!.IsAuthenticated)
             {
                 var reviews = await _context.Reviews.ToListAsync();
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var userRole = await _context.Account
-                  .Where(a => a.ID_Account.ToString() == userId)
-                  .Select(a => a.ID_Role)
-                  .FirstOrDefaultAsync();
+                    .Where(a => a.ID_Account.ToString() == userId)
+                    .Select(a => a.ID_Role)
+                    .FirstOrDefaultAsync();
+
                 if (userRole != default && userRole == 3)
                 {
-                    var componentList = _context.Component.Select(c => new SelectListItem
-                    {
-                        Text = $"{c.Name}",
-                        Value = c.ID_Component.ToString()
-                    }).ToList();
+                    var componentList = await _context.Component
+                        .Select(c => new SelectListItem
+                        {
+                            Text = $"{c.Name}",
+                            Value = c.ID_Component.ToString()
+                        })
+                        .ToListAsync();
                     componentList.Insert(0, new SelectListItem { Text = "Выберите комплектующее", Value = "" });
                     ViewBag.ComponentList = componentList;
-                
-                    return View("AddReviews",reviews);
+
+                    var componentNames = await _context.Component
+                        .ToDictionaryAsync(c => c.ID_Component, c => c.Name);
+                    ViewBag.ComponentNames = componentNames;
+
+                    return View("AddReviews", reviews);
                 }
                 else
                 {
                     return View(reviews);
                 }
             }
-           return RedirectToAction("AccessDenied", "Error");
-
+            return RedirectToAction("AccessDenied", "Error");
         }
+
         [HttpPost]
         public async Task<ActionResult> AddReviews(IFormCollection form)
         {
@@ -96,7 +113,7 @@ namespace DetailShop.Controllers
             var user = await _context.Account.FirstOrDefaultAsync(a => a.ID_Account == Convert.ToInt32(userId));
             var model = new Reviews
             {
-                ID_Account = user.ID_Account,
+                ID_Account = user!.ID_Account,
                 Comment = form["comment"],
                 ID_Component = Convert.ToInt32(form["type"]),
                 Rating = Convert.ToInt32(form["rating"])
@@ -229,6 +246,51 @@ namespace DetailShop.Controllers
                 }
             }
             return View(user);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Pay()
+        {
+            CheckRole();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userOrders = await _context.Orders
+                                                .Where(order => order.ID_Account == Convert.ToInt32(userId))
+                                                .ToListAsync();
+
+            decimal totalCost = 0;
+
+            foreach (var order in userOrders)
+            {
+                totalCost += order.Result;
+            }
+
+            ViewBag.TotalCost = totalCost;
+            return View();
+
+        }
+        [HttpGet]
+        public ActionResult PaySuccess()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PaySuc()
+        {
+            CheckRole();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userOrders = await _context.Orders
+                                                .Where(order => order.ID_Account == Convert.ToInt32(userId))
+                                                .ToListAsync();
+            try
+            {
+                _context.Orders.RemoveRange(userOrders);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("PaySuccess", "Main");
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync("Error");
+            }
+            return View(userOrders);
         }
     }
 }

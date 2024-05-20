@@ -322,10 +322,29 @@ namespace DetailShop.Controllers
                 return RedirectToAction("AccsessDenied", "Error");
             }
         }
-    
 
+        public async Task<IActionResult> ComponentDetails(int id)
+        {
+            CheckRole();
+            var component = await _context.Component.FindAsync(id);
+            var provider = await _context.Provider
+           .Where(p => p.ID_Provider == component.ID_Provider)
+           .Select(p => p.Title)
+           .FirstOrDefaultAsync();
+
+            var type = await _context.Type_Component
+                .Where(t => t.ID_Type == component.ID_Type)
+                .Select(t => t.Title)
+                .FirstOrDefaultAsync();
+            if (component == null)
+            {
+                return NotFound();
+            }
+            ViewBag.ProviderTitle = provider;
+            ViewBag.TypeTitle = type;
+            return View(component);
+        }
     }
-
 }
 
 

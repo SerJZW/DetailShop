@@ -74,7 +74,7 @@
     }
     @using (Html.BeginForm("DeleteComponents", "Home", FormMethod.Post))
     {
-        <h3 style="text-align:center; margin:0;">Удалить Продукт</h3>
+        <h1>Удалить Продукт</h1>
         <div>
             <label for="idprod">Комплектующее:</label>
             @Html.DropDownList("idprod", (IEnumerable<SelectListItem>)ViewBag.DeleteCompList, new { @class = "form-control", required = "required" })

@@ -1,11 +1,15 @@
 ﻿@model List<DetailShop.Models.DbModels.Reviews>
 <h1>Отзывы</h1>
-@foreach (var reviews in @Model)
+
+@foreach (var review in Model)
 {
     <div class="divBlock">
-        <p>Пользователь № @reviews.ID_Account</p>
-        <p>Комментарий: <i style="font-weight:600">@reviews.Comment</i></p>
-        <p>Оценка: <strong>@reviews.Rating</strong></p>
+        <p>Пользователь № @review.ID_Account</p>
+        <p>Комплектующее: @(ViewBag.ComponentNames.ContainsKey(review.ID_Component) ? ViewBag.ComponentNames[review.ID_Component] : "Неизвестно")</p>
+        <p>Комментарий: <i style="font-weight:600">@review.Comment</i></p>
+        <p>Оценка: <strong>@review.Rating</strong></p>
     </div>
 }
+
+
 

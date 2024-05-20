@@ -1,0 +1,22 @@
+﻿@model List<DetailShop.Models.DbModels.Orders>
+@{
+    decimal totalCost = ViewBag.TotalCost != null ? Convert.ToDecimal(ViewBag.TotalCost) : 0;
+}
+<main>
+    <h1>Оплата заказа</h1>
+    @using (Html.BeginForm("PaySuc", "Main", FormMethod.Post))
+    {
+        <div>
+            <label for="card">Номер карты:</label>
+            @Html.TextBox("card", null, new { @class = "form-control", required = "required"})
+        </div>
+        <div>
+            <label for="cvv">CVV:</label>
+            @Html.TextBox("cvv", null, new { @class = "form-control", required = "required" })
+        </div>
+        <button class="btn btn-primary" type="submit">Оплатить</button>
+     <p style="text-align:center; margin-right:30px;">Общая сумма заказа: <strong>@Math.Round(totalCost, 2)</strong></p>
+    }
+   
+
+</main>

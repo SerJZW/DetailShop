@@ -20,6 +20,7 @@ namespace DetailShop.Models.Menu
             new ItemMenu("Home", "Discount", "Скидки"),
             new ItemMenu("Home", "Providers", "Производители"),
             new ItemMenu("Authentication", "Exit", "Выйти"),
+            
         };
         public List<ItemMenu> AdminHeaderMenu = new List<ItemMenu>()
         {
