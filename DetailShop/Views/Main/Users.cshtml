@@ -51,10 +51,13 @@
     @using (Html.BeginForm("EditUser", "Main", FormMethod.Post))
     {
         <h1>Редактировать пользователя</h1>
+
         <div>
-            <label for="editlogin">ID:</label>
-            @Html.TextBox("ID_Account", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+            <label for="searchId">Найти по ID:</label>
+            <input type="text" id="searchId" class="form-control" style="height: 30px">
+            <button type="button" class="btn btn-primary" id="searchButton">Найти</button>
         </div>
+
         <div>
             <label for="editlogin">Логин:</label>
             @Html.TextBox("Login", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
@@ -74,4 +77,38 @@
 
         <button class="btn btn-primary" type="submit">Добавить</button>
     }
+
+    @section Scripts {
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#searchButton').click(function () {
+                    var id = $('#searchId').val();
+                    if (id) {
+                        $.ajax({
+                            url: '@Url.Action("GetUserById", "Main")',
+                            type: 'GET',
+                            data: { id: id },
+                            success: function (data) {
+                                if (data) {
+                                    $('#ID_Account').val(data.id_Account);
+                                    $('#Login').val(data.login);
+                                    $('#Password').val(data.password);
+                                    $('#ID_Role').val(data.id_Role);
+                                } else {
+                                    alert("Пользователь не найден");
+                                }
+                            },
+                            error: function () {
+                                alert("Произошла ошибка при поиске пользователя");
+                            }
+                        });
+                    } else {
+                        alert("Введите ID пользователя");
+                    }
+                });
+            });
+        </script>
+    }
+
 </main>

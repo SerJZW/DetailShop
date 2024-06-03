@@ -11,5 +11,7 @@
     @await Html.PartialAsync("Header")
     @RenderBody()
     @await Html.PartialAsync("Footer")
+    @RenderSection("Scripts", required: false)
+    @RenderSection("Script", required: false)
 </body>
 </html>

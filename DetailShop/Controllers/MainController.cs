@@ -43,7 +43,7 @@ namespace DetailShop.Controllers
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var userOrders = await _context.Orders
-                                               .Include(order => order.Component) 
+                                               .Include(order => order.Component)
                                                .Where(order => order.ID_Account == Convert.ToInt32(userId))
                                                .ToListAsync();
 
@@ -248,6 +248,27 @@ namespace DetailShop.Controllers
             }
             return View(user);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _context.Account.FindAsync(id);
+            if (user == null)
+            {
+                return Json(null);
+            }
+
+            // Do not return the password directly for security reasons
+            var userDto = new
+            {
+                ID_Account = user.ID_Account,
+                Login = user.Login,
+                ID_Role = user.ID_Role,
+                Password = user.Password,
+            };
+
+            return Json(userDto);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Pay()
         {

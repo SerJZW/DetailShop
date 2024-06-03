@@ -84,39 +84,81 @@
     @using (Html.BeginForm("EditProducts", "Home", FormMethod.Post))
     {
         <h1>Редактировать продукт</h1>
+
         <div>
-            <label for="editlogin">ID:</label>
-            @Html.TextBox("ID_Component", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
-        </div>
-        <div>
-            <label for="editlogin">Название:</label>
-            @Html.TextBox("Name", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+            <label for="searchId">Найти по ID:</label>
+            <input type="text" id="searchId" class="form-control" style="height: 30px">
+            <button type="button" class="btn btn-primary" id="findButton">Найти</button>
         </div>
 
         <div>
-            <label for="editpassword">Описание:</label>
-            @Html.TextBox("Description", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+            <label for="Name">Название:</label>
+            @Html.TextBox("Name", null, new { id = "Name", @style = "height: 30px", @class = "form-control", required = "required" })
         </div>
         <div>
-            <label for="editemail">Цена:</label>
-            @Html.TextBox("Cost", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+            <label for="Description">Описание:</label>
+            @Html.TextBox("Description", null, new { id = "Description", @style = "height: 30px", @class = "form-control", required = "required" })
         </div>
         <div>
-            <label for="type">Тип продукта:</label>
-            @Html.DropDownList("ID_Type", (IEnumerable<SelectListItem>)ViewBag.TypeList, new { @class = "form-control", required = "required" })
+            <label for="Cost">Цена:</label>
+            @Html.TextBox("Cost", null, new { id = "Cost", @style = "height: 30px", @class = "form-control", required = "required" })
         </div>
         <div>
-            <label for="manifacturers">Произовдитель:</label>
-            @Html.DropDownList("ID_Provider", (IEnumerable<SelectListItem>)ViewBag.ManifList, new { @class = "form-control", required = "required" })
+            <label for="ID_Type">Тип продукта:</label>
+            @Html.DropDownList("ID_Type", (IEnumerable<SelectListItem>)ViewBag.TypeList, new { id = "ID_Type", @class = "form-control", required = "required" })
         </div>
         <div>
-            <label for="editlogin">Характеристики:</label>
-            @Html.TextBox("Specifications", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+            <label for="ID_Provider">Производитель:</label>
+            @Html.DropDownList("ID_Provider", (IEnumerable<SelectListItem>)ViewBag.ManifList, new { id = "ID_Provider", @class = "form-control", required = "required" })
         </div>
         <div>
-            <label for="editlogin">Кол-во:</label>
-            @Html.TextBox("Count", null, new { @style = "height: 30px", @class = "form-control", required = "required" })
+            <label for="Specifications">Характеристики:</label>
+            @Html.TextBox("Specifications", null, new { id = "Specifications", @style = "height: 30px", @class = "form-control", required = "required" })
         </div>
+        <div>
+            <label for="Count">Кол-во:</label>
+            @Html.TextBox("Count", null, new { id = "Count", @style = "height: 30px", @class = "form-control", required = "required" })
+        </div>
+
         <button class="btn btn-primary" type="submit">Добавить</button>
     }
+    @section Script {
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#findButton').click(function () {
+                    var id = $('#searchId').val();
+                    if (id) {
+                        $.ajax({
+                            url: '@Url.Action("GetComponentById", "Home")',
+                            type: 'GET',
+                            data: { id: id },
+                            success: function (data) {
+                                console.log("Data received: ", data);
+                                if (data) {
+                                    $('#ID_Component').val(data.id_Component);
+                                    $('#Name').val(data.name);
+                                    $('#Description').val(data.description);
+                                    $('#Cost').val(data.cost);
+                                    $('#ID_Type').val(data.id_Type);
+                                    $('#ID_Provider').val(data.id_Provider);
+                                    $('#Specifications').val(data.specifications);
+                                    $('#Count').val(data.count);
+                                } else {
+                                    alert("Компонент не найден");
+                                }
+                            },
+                            error: function () {
+                                alert("Произошла ошибка при поиске компонента");
+                            }
+                        });
+                    } else {
+                        alert("Введите ID компонента");
+                    }
+                });
+            });
+
+        </script>
+    }
+
 </main>

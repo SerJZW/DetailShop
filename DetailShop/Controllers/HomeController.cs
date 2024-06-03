@@ -12,6 +12,7 @@ using System.ComponentModel;
 using DetailShop.Models.DbModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace DetailShop.Controllers
 {
@@ -115,7 +116,7 @@ namespace DetailShop.Controllers
 
             var Order = new Orders
             {
-                ID_Account = user.ID_Account,              
+                ID_Account = user.ID_Account,
                 Result = Convert.ToDecimal(unitPrice),
                 Component_Id = productID,
             };
@@ -133,7 +134,7 @@ namespace DetailShop.Controllers
                 ID_Component = productID,
                 Quanity = 1,
                 ID_Order = Order.ID_Order,
-            };           
+            };
             if (ModelState.IsValid)
             {
                 try
@@ -203,6 +204,30 @@ namespace DetailShop.Controllers
                 return RedirectToAction("AunthError", "Error");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetComponentById(int id)
+        {
+            var component = await _context.Component.FindAsync(id);
+            if (component == null)
+            {
+                return Json(null);
+            }
+
+            var componentDto = new
+            {
+                ID_Component = component.ID_Component,
+                Name = component.Name,
+                Description = component.Description,
+                Cost = component.Cost,
+                ID_Type = component.ID_Type,
+                ID_Provider = component.ID_Provider,
+                Specifications = component.Specifications,
+                Count = component.Count
+            };
+
+            return Json(componentDto);
+        }
+
         [HttpPost]
         public async Task<IActionResult> EditProducts(Components prod)
         {
