@@ -11,7 +11,7 @@
                         <h2>@product.Name</h2>
                     </a>
                     <p class="product-description">@product.Description</p>
-                    <p class="product-price">@Math.Round(product.Cost, 2)</p>
+                    <p class="product-price">@Math.Round(product.Cost, 2)$</p>
                     <button class="buy-button" onclick="addToCart(@product.ID_Component, @product.Cost)">Купить</button>
                 </div>
             </div>

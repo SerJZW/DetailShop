@@ -5,7 +5,7 @@
 {
     <div class="divBlock">
         <p>Пользователь № @review.ID_Account</p>
-        <p>Комплектующее: @(ViewBag.ComponentNames.ContainsKey(review.ID_Component) ? ViewBag.ComponentNames[review.ID_Component] : "Неизвестно")</p>
+        <p>Комплектующее: @review.ID_Component</p>
         <p>Комментарий: <i style="font-weight:600">@review.Comment</i></p>
         <p>Оценка: <strong>@review.Rating</strong></p>
     </div>

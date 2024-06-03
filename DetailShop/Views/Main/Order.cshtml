@@ -3,7 +3,6 @@
     var totalCost = ViewBag.TotalCost;
 }
 <main>
- 
     <h2 style="text-align:center;">Ваша корзина</h2>
     @using (Html.BeginForm("Pay", "Main", FormMethod.Get))
     {
@@ -13,14 +12,15 @@
                 <div>
                     <div class="manufacturer-card">
                         <p>Номер заказа: @order.ID_Order</p>
-                        <p>Цена: @Math.Round(order.Result, 2)</p>
+                        <a href="@Url.Action("ComponentDetails", "Home", new { id = order.Component_Id })">
+                            <p>@order.Component?.Name</p>
+                        </a>
+                        <p>Цена: @Math.Round(order.Result, 2)$</p>
                     </div>
                 </div>
-
             }
         </ul>
-        <p style="text-align:center; margin-right:30px;">Общая сумма заказа: <strong>@Math.Round(totalCost, 2)</strong></p>
+        <p style="text-align:center; margin-right:30px;">Общая сумма заказа: <strong>@Math.Round(totalCost, 2)$</strong></p>
         <button class="btn btn-primary" type="submit">Перейти к оплате</button>
     }
 </main>
-

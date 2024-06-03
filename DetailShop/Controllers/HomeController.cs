@@ -117,6 +117,7 @@ namespace DetailShop.Controllers
             {
                 ID_Account = user.ID_Account,              
                 Result = Convert.ToDecimal(unitPrice),
+                Component_Id = productID,
             };
             try
             {
@@ -187,7 +188,7 @@ namespace DetailShop.Controllers
             var prod = await _context.Component.FindAsync(idprod);
             if (prod == null)
             {
-                return View("AunthError");
+                return RedirectToAction("NotFound", "Error");
             }
 
             try

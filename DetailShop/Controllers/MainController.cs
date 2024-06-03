@@ -43,17 +43,18 @@ namespace DetailShop.Controllers
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var userOrders = await _context.Orders
-                                                .Where(order => order.ID_Account == Convert.ToInt32(userId))
-                                                .ToListAsync();
+                                               .Include(order => order.Component) 
+                                               .Where(order => order.ID_Account == Convert.ToInt32(userId))
+                                               .ToListAsync();
 
                 decimal totalCost = 0;
 
                 foreach (var order in userOrders)
                 {
-                    totalCost += order.Result; 
+                    totalCost += order.Result;
                 }
 
-                ViewBag.TotalCost = totalCost; 
+                ViewBag.TotalCost = totalCost;
 
                 if (userOrders != null && userOrders.Count > 0)
                 {
@@ -103,7 +104,7 @@ namespace DetailShop.Controllers
                     return View(reviews);
                 }
             }
-            return RedirectToAction("AccessDenied", "Error");
+            return RedirectToAction("AccsessDenied", "Error");
         }
 
         [HttpPost]
@@ -200,7 +201,7 @@ namespace DetailShop.Controllers
             var user = await _context.Account.FindAsync(userId);
             if (user == null)
             {
-                return NotFound();
+                return RedirectToAction("NotFound", "Error");
             }
 
             try
@@ -270,6 +271,7 @@ namespace DetailShop.Controllers
         [HttpGet]
         public ActionResult PaySuccess()
         {
+            CheckRole();
             return View();
         }
         [HttpPost]

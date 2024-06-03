@@ -13,5 +13,6 @@ namespace DetailShop.Models.DbModels
         public string? Specifications { get; set; }
         public int Count { get; set; }
 
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }
